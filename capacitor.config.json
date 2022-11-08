@@ -1,0 +1,6 @@
+{
+  "appId": "com.rooms.vue3.test.app",
+  "appName": "rooms-app-vue",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
