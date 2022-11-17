@@ -1,47 +1,74 @@
-<script setup></script>
+<script setup>
+import { useStore } from 'vuex'
+import { ref } from 'vue'
+import {
+  Document,
+  Menu as IconMenu,
+  User,
+  Setting,
+  SwitchButton
+} from '@element-plus/icons-vue'
+
+const store = useStore()
+const logout = () => {
+  store.dispatch('logout')
+}
+const isCollapse = ref(true)
+const handleOpen = (key, keyPath) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key, keyPath) => {
+  console.log(key, keyPath)
+}
+</script>
 
 <template>
-  <div class="container">
-    <div class="common-layout">
-      <el-container>
-        <el-header><span>Welcome!</span></el-header>
-        <el-main class="home">
-          <p class="info">
-            Now you can log in with your
-            <router-link to="/login"> email </router-link>
-            or your
-            <a href="#">Google account</a>
-          </p>
-          <p class="info">
-            Or you can
-            <router-link to="/registration">register</router-link> new account
-            with your email
-          </p>
-        </el-main>
-      </el-container>
-    </div>
+  <div>
+    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
+      <el-radio-button :label="false">Show</el-radio-button>
+      <el-radio-button :label="true">Hide</el-radio-button>
+    </el-radio-group>
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      :collapse="isCollapse"
+      @open="handleOpen"
+      @close="handleClose"
+    >
+      <el-sub-menu index="1">
+        <template #title>
+          <el-icon><User /></el-icon>
+          <span>Navigator One</span>
+        </template>
+        <el-menu-item-group>
+          <template #title><span>Title</span></template>
+          <el-menu-item index="1-1">item one</el-menu-item>
+          <el-menu-item index="1-2">item two</el-menu-item>
+        </el-menu-item-group>
+      </el-sub-menu>
+      <el-menu-item index="2">
+        <el-icon><icon-menu /></el-icon>
+        <template #title>Navigator Two</template>
+      </el-menu-item>
+      <el-menu-item index="3">
+        <el-icon><Document /></el-icon>
+        <template #title>Navigator Three</template>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <el-icon><setting /></el-icon>
+        <template #title>Navigator Four</template>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <el-icon><SwitchButton /></el-icon>
+        <template #title><p @click="logout">Logout</p></template>
+      </el-menu-item>
+    </el-menu>
   </div>
 </template>
 
 <style lang="scss">
-.container {
-  width: 95%;
-  max-width: 600px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.info {
-  text-align: center;
-  line-height: 1.5;
-  &:first-child {
-    margin-bottom: 10px;
-  }
-}
-.home {
-  height: 400px;
-  max-height: 95%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>

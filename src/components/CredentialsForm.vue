@@ -1,5 +1,6 @@
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue'
+
 const props = defineProps({
   typeOfAction: { type: String, required: true }
 })

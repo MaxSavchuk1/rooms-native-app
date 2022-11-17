@@ -1,6 +1,7 @@
 <script setup>
 import CredentialsForm from '../components/CredentialsForm.vue'
 import { useStore } from 'vuex'
+
 const store = useStore()
 const register = form => {
   store.dispatch('register', form.value)
@@ -8,5 +9,5 @@ const register = form => {
 </script>
 
 <template>
-  <CredentialsForm typeOfAction="Register" @submit="register" />
+  <credentials-form typeOfAction="Register" @submit="register" />
 </template>
